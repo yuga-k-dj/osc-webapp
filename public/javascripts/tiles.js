@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // set func and color of tiles
 $(function() {
   let lists = $("#tiles").children("li");
@@ -6,11 +7,10 @@ $(function() {
   }
 });
 
-$("#tiles li").click( function () {
+$("#tiles li").click( function() {
   let address = $(this).find('.address').html();
   let msg = $(this).find('.msg').html();
   oscSend(address, msg);
-
   $(this).css("border-radius", "calc(100vw/3)");
   $(this).find('.log').html("sending...");
 
@@ -21,3 +21,6 @@ $("#tiles li").click( function () {
   return false;
 });
 
+osc.on('message', function(msg){
+  $('#messages').prepend($('<li>').text(msg));
+});
